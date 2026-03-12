@@ -163,6 +163,23 @@ docker pull morelitea/initiative:0.32      # specific minor
 
 Images support `linux/amd64` and `linux/arm64` architectures.
 
+### GitHub Container Registry (for forks)
+
+This repository also publishes Docker images to GitHub Container Registry via Actions.
+
+```bash
+# Latest build from default branch
+docker pull ghcr.io/liseren91/initiative:latest
+
+# Branch build
+docker pull ghcr.io/liseren91/initiative:main
+
+# Commit build
+docker pull ghcr.io/liseren91/initiative:sha-<commit>
+```
+
+If you use a different GitHub account/repository, replace `liseren91/initiative` with your own `<owner>/<repo>`.
+
 ---
 
 ## Configuration
