@@ -13,7 +13,7 @@ def _ensure_asyncpg_url(url: str) -> str:
 
     asyncpg uses its own SSL handling and doesn't accept libpq-style params
     like sslmode, channel_binding, etc.  When sslmode=require (or stricter)
-    is present we translate it to asyncpg's ``ssl=true`` query param so the
+    is present we translate it to asyncpg's ``ssl=require`` query param so the
     connection still uses TLS.
     """
     if not url:
@@ -31,7 +31,7 @@ def _ensure_asyncpg_url(url: str) -> str:
             needs_ssl = True
         cleaned = {k: v for k, v in params.items() if k not in _ASYNCPG_UNSUPPORTED_PARAMS}
         if needs_ssl and "ssl" not in cleaned:
-            cleaned["ssl"] = ["true"]
+            cleaned["ssl"] = ["require"]
         new_query = urlencode(cleaned, doseq=True)
         parsed = parsed._replace(query=new_query)
         url = urlunparse(parsed)
