@@ -18,11 +18,15 @@ def _ensure_asyncpg_url(url: str) -> str:
     """
     if not url:
         return url
-    for prefix in ("postgresql+psycopg2://", "postgres://", "postgresql://"):
-        if url.startswith(prefix):
-            url = "postgresql+asyncpg://" + url[len(prefix):]
-            break
+    # Some platforms/users provide quoted env values; normalize first.
+    url = url.strip().strip("'\"")
+
     parsed = urlparse(url)
+    scheme = parsed.scheme.lower()
+    if scheme in {"postgres", "postgresql", "postgresql+psycopg2", "postgresql+psycopg"}:
+        parsed = parsed._replace(scheme="postgresql+asyncpg")
+        url = urlunparse(parsed)
+        parsed = urlparse(url)
     if parsed.query:
         params = parse_qs(parsed.query, keep_blank_values=True)
         needs_ssl = False
