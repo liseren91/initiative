@@ -10,6 +10,7 @@ import {
   Star,
   Users,
   ListTodo,
+  Lightbulb,
   Tag,
   ChevronsDownUp,
   ChevronsUpDown,
@@ -387,6 +388,17 @@ export const AppSidebar = () => {
                                     <Link to={gp("/documents")} className="flex items-center gap-2">
                                       <ScrollText className="h-4 w-4" />
                                       <span>{t("allDocuments")}</span>
+                                    </Link>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton asChild>
+                                    <Link
+                                      to={gp("/hypotheses")}
+                                      className="flex items-center gap-2"
+                                    >
+                                      <Lightbulb className="h-4 w-4" />
+                                      <span>{t("hypotheses")}</span>
                                     </Link>
                                   </SidebarMenuButton>
                                 </SidebarMenuItem>

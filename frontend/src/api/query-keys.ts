@@ -201,3 +201,10 @@ export const invalidateLatestVersion = () => invalidateExact([`/api/v1/version/l
 // ── Task Statuses ────────────────────────────────────────────────────────────
 
 export const invalidateAllTaskStatuses = () => invalidatePrefix("/api/v1/projects");
+
+// ── Hypotheses ───────────────────────────────────────────────────────────────
+
+export const invalidateAllHypotheses = () => invalidatePrefix("/api/v1/hypotheses");
+
+export const invalidateHypothesis = (hypothesisId: number) =>
+  invalidateExact([`/api/v1/hypotheses/${hypothesisId}`]);

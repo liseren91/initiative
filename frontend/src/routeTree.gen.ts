@@ -77,6 +77,10 @@ import { Route as ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRouteImp
 import { Route as ServerRequiredAuthenticatedGGuildIdQueuesQueueIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/queues_.$queueId_.settings'
 import { Route as ServerRequiredAuthenticatedGGuildIdProjectsProjectIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/projects_.$projectId_.settings'
 import { Route as ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/initiatives_.$initiativeId_.settings'
+import { Route as ServerRequiredAuthenticatedHypothesesRouteImport } from './routes/_serverRequired/_authenticated/hypotheses'
+import { Route as ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/hypotheses_.$hypothesisId'
+import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses'
+import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses_.$hypothesisId'
 import { Route as ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/documents_.$documentId_.settings'
 
 const ConnectRoute = ConnectRouteImport.update({
@@ -402,6 +406,30 @@ const ServerRequiredAuthenticatedGGuildIdDocumentsRoute =
     path: '/documents',
     getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
   } as any)
+const ServerRequiredAuthenticatedHypothesesRoute =
+  ServerRequiredAuthenticatedHypothesesRouteImport.update({
+    id: '/hypotheses',
+    path: '/hypotheses',
+    getParentRoute: () => ServerRequiredAuthenticatedRoute,
+  } as any)
+const ServerRequiredAuthenticatedHypothesesHypothesisIdRoute =
+  ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport.update({
+    id: '/hypotheses_/$hypothesisId',
+    path: '/hypotheses/$hypothesisId',
+    getParentRoute: () => ServerRequiredAuthenticatedRoute,
+  } as any)
+const ServerRequiredAuthenticatedGGuildIdHypothesesRoute =
+  ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport.update({
+    id: '/hypotheses',
+    path: '/hypotheses',
+    getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
+  } as any)
+const ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute =
+  ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport.update({
+    id: '/hypotheses_/$hypothesisId',
+    path: '/hypotheses/$hypothesisId',
+    getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
+  } as any)
 const ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRoute =
   ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRouteImport.update({
     id: '/documents_/$documentId_/settings',
@@ -504,6 +532,7 @@ export interface FileRoutesByFullPath {
   '/welcome': typeof ServerRequiredWelcomeRoute
   '/created-tasks': typeof ServerRequiredAuthenticatedCreatedTasksRoute
   '/documents': typeof ServerRequiredAuthenticatedDocumentsRoute
+  '/hypotheses': typeof ServerRequiredAuthenticatedHypothesesRoute
   '/initiatives': typeof ServerRequiredAuthenticatedInitiativesRoute
   '/my-documents': typeof ServerRequiredAuthenticatedMyDocumentsRoute
   '/my-projects': typeof ServerRequiredAuthenticatedMyProjectsRoute
@@ -517,6 +546,7 @@ export interface FileRoutesByFullPath {
   '/oidc/callback': typeof ServerRequiredOidcCallbackRoute
   '/documents/$documentId': typeof ServerRequiredAuthenticatedDocumentsDocumentIdRoute
   '/g/$guildId': typeof ServerRequiredAuthenticatedGGuildIdRouteWithChildren
+  '/hypotheses/$hypothesisId': typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRoute
   '/initiatives/$initiativeId': typeof ServerRequiredAuthenticatedInitiativesInitiativeIdRoute
   '/profile/ai': typeof ServerRequiredAuthenticatedProfileAiRoute
   '/profile/danger': typeof ServerRequiredAuthenticatedProfileDangerRoute
@@ -532,6 +562,7 @@ export interface FileRoutesByFullPath {
   '/profile/': typeof ServerRequiredAuthenticatedProfileIndexRoute
   '/documents/$documentId/settings': typeof ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRoute
   '/g/$guildId/documents': typeof ServerRequiredAuthenticatedGGuildIdDocumentsRoute
+  '/g/$guildId/hypotheses': typeof ServerRequiredAuthenticatedGGuildIdHypothesesRoute
   '/g/$guildId/initiatives': typeof ServerRequiredAuthenticatedGGuildIdInitiativesRoute
   '/g/$guildId/projects': typeof ServerRequiredAuthenticatedGGuildIdProjectsRoute
   '/g/$guildId/queues': typeof ServerRequiredAuthenticatedGGuildIdQueuesRoute
@@ -549,6 +580,7 @@ export interface FileRoutesByFullPath {
   '/settings/admin/': typeof ServerRequiredAuthenticatedSettingsAdminIndexRoute
   '/settings/guild/': typeof ServerRequiredAuthenticatedSettingsGuildIndexRoute
   '/g/$guildId/documents/$documentId': typeof ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute
+  '/g/$guildId/hypotheses/$hypothesisId': typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute
   '/g/$guildId/initiatives/$initiativeId': typeof ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute
   '/g/$guildId/projects/$projectId': typeof ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute
   '/g/$guildId/queues/$queueId': typeof ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRoute
@@ -573,6 +605,7 @@ export interface FileRoutesByTo {
   '/welcome': typeof ServerRequiredWelcomeRoute
   '/created-tasks': typeof ServerRequiredAuthenticatedCreatedTasksRoute
   '/documents': typeof ServerRequiredAuthenticatedDocumentsRoute
+  '/hypotheses': typeof ServerRequiredAuthenticatedHypothesesRoute
   '/initiatives': typeof ServerRequiredAuthenticatedInitiativesRoute
   '/my-documents': typeof ServerRequiredAuthenticatedMyDocumentsRoute
   '/my-projects': typeof ServerRequiredAuthenticatedMyProjectsRoute
@@ -584,6 +617,7 @@ export interface FileRoutesByTo {
   '/invite/$code': typeof ServerRequiredInviteCodeRoute
   '/oidc/callback': typeof ServerRequiredOidcCallbackRoute
   '/documents/$documentId': typeof ServerRequiredAuthenticatedDocumentsDocumentIdRoute
+  '/hypotheses/$hypothesisId': typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRoute
   '/initiatives/$initiativeId': typeof ServerRequiredAuthenticatedInitiativesInitiativeIdRoute
   '/profile/ai': typeof ServerRequiredAuthenticatedProfileAiRoute
   '/profile/danger': typeof ServerRequiredAuthenticatedProfileDangerRoute
@@ -597,6 +631,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ServerRequiredAuthenticatedProfileIndexRoute
   '/documents/$documentId/settings': typeof ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRoute
   '/g/$guildId/documents': typeof ServerRequiredAuthenticatedGGuildIdDocumentsRoute
+  '/g/$guildId/hypotheses': typeof ServerRequiredAuthenticatedGGuildIdHypothesesRoute
   '/g/$guildId/initiatives': typeof ServerRequiredAuthenticatedGGuildIdInitiativesRoute
   '/g/$guildId/projects': typeof ServerRequiredAuthenticatedGGuildIdProjectsRoute
   '/g/$guildId/queues': typeof ServerRequiredAuthenticatedGGuildIdQueuesRoute
@@ -613,6 +648,7 @@ export interface FileRoutesByTo {
   '/settings/admin': typeof ServerRequiredAuthenticatedSettingsAdminIndexRoute
   '/settings/guild': typeof ServerRequiredAuthenticatedSettingsGuildIndexRoute
   '/g/$guildId/documents/$documentId': typeof ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute
+  '/g/$guildId/hypotheses/$hypothesisId': typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute
   '/g/$guildId/initiatives/$initiativeId': typeof ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute
   '/g/$guildId/projects/$projectId': typeof ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute
   '/g/$guildId/queues/$queueId': typeof ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRoute
@@ -639,6 +675,7 @@ export interface FileRoutesById {
   '/_serverRequired/welcome': typeof ServerRequiredWelcomeRoute
   '/_serverRequired/_authenticated/created-tasks': typeof ServerRequiredAuthenticatedCreatedTasksRoute
   '/_serverRequired/_authenticated/documents': typeof ServerRequiredAuthenticatedDocumentsRoute
+  '/_serverRequired/_authenticated/hypotheses': typeof ServerRequiredAuthenticatedHypothesesRoute
   '/_serverRequired/_authenticated/initiatives': typeof ServerRequiredAuthenticatedInitiativesRoute
   '/_serverRequired/_authenticated/my-documents': typeof ServerRequiredAuthenticatedMyDocumentsRoute
   '/_serverRequired/_authenticated/my-projects': typeof ServerRequiredAuthenticatedMyProjectsRoute
@@ -653,6 +690,7 @@ export interface FileRoutesById {
   '/_serverRequired/_authenticated/': typeof ServerRequiredAuthenticatedIndexRoute
   '/_serverRequired/_authenticated/documents_/$documentId': typeof ServerRequiredAuthenticatedDocumentsDocumentIdRoute
   '/_serverRequired/_authenticated/g/$guildId': typeof ServerRequiredAuthenticatedGGuildIdRouteWithChildren
+  '/_serverRequired/_authenticated/hypotheses_/$hypothesisId': typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRoute
   '/_serverRequired/_authenticated/initiatives_/$initiativeId': typeof ServerRequiredAuthenticatedInitiativesInitiativeIdRoute
   '/_serverRequired/_authenticated/profile/ai': typeof ServerRequiredAuthenticatedProfileAiRoute
   '/_serverRequired/_authenticated/profile/danger': typeof ServerRequiredAuthenticatedProfileDangerRoute
@@ -668,6 +706,7 @@ export interface FileRoutesById {
   '/_serverRequired/_authenticated/profile/': typeof ServerRequiredAuthenticatedProfileIndexRoute
   '/_serverRequired/_authenticated/documents_/$documentId_/settings': typeof ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRoute
   '/_serverRequired/_authenticated/g/$guildId/documents': typeof ServerRequiredAuthenticatedGGuildIdDocumentsRoute
+  '/_serverRequired/_authenticated/g/$guildId/hypotheses': typeof ServerRequiredAuthenticatedGGuildIdHypothesesRoute
   '/_serverRequired/_authenticated/g/$guildId/initiatives': typeof ServerRequiredAuthenticatedGGuildIdInitiativesRoute
   '/_serverRequired/_authenticated/g/$guildId/projects': typeof ServerRequiredAuthenticatedGGuildIdProjectsRoute
   '/_serverRequired/_authenticated/g/$guildId/queues': typeof ServerRequiredAuthenticatedGGuildIdQueuesRoute
@@ -685,6 +724,7 @@ export interface FileRoutesById {
   '/_serverRequired/_authenticated/settings/admin/': typeof ServerRequiredAuthenticatedSettingsAdminIndexRoute
   '/_serverRequired/_authenticated/settings/guild/': typeof ServerRequiredAuthenticatedSettingsGuildIndexRoute
   '/_serverRequired/_authenticated/g/$guildId/documents_/$documentId': typeof ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute
+  '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId': typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute
   '/_serverRequired/_authenticated/g/$guildId/initiatives_/$initiativeId': typeof ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute
   '/_serverRequired/_authenticated/g/$guildId/projects_/$projectId': typeof ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute
   '/_serverRequired/_authenticated/g/$guildId/queues_/$queueId': typeof ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRoute
@@ -711,6 +751,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/created-tasks'
     | '/documents'
+    | '/hypotheses'
     | '/initiatives'
     | '/my-documents'
     | '/my-projects'
@@ -724,6 +765,7 @@ export interface FileRouteTypes {
     | '/oidc/callback'
     | '/documents/$documentId'
     | '/g/$guildId'
+    | '/hypotheses/$hypothesisId'
     | '/initiatives/$initiativeId'
     | '/profile/ai'
     | '/profile/danger'
@@ -739,6 +781,7 @@ export interface FileRouteTypes {
     | '/profile/'
     | '/documents/$documentId/settings'
     | '/g/$guildId/documents'
+    | '/g/$guildId/hypotheses'
     | '/g/$guildId/initiatives'
     | '/g/$guildId/projects'
     | '/g/$guildId/queues'
@@ -756,6 +799,7 @@ export interface FileRouteTypes {
     | '/settings/admin/'
     | '/settings/guild/'
     | '/g/$guildId/documents/$documentId'
+    | '/g/$guildId/hypotheses/$hypothesisId'
     | '/g/$guildId/initiatives/$initiativeId'
     | '/g/$guildId/projects/$projectId'
     | '/g/$guildId/queues/$queueId'
@@ -780,6 +824,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/created-tasks'
     | '/documents'
+    | '/hypotheses'
     | '/initiatives'
     | '/my-documents'
     | '/my-projects'
@@ -791,6 +836,7 @@ export interface FileRouteTypes {
     | '/invite/$code'
     | '/oidc/callback'
     | '/documents/$documentId'
+    | '/hypotheses/$hypothesisId'
     | '/initiatives/$initiativeId'
     | '/profile/ai'
     | '/profile/danger'
@@ -804,6 +850,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/documents/$documentId/settings'
     | '/g/$guildId/documents'
+    | '/g/$guildId/hypotheses'
     | '/g/$guildId/initiatives'
     | '/g/$guildId/projects'
     | '/g/$guildId/queues'
@@ -820,6 +867,7 @@ export interface FileRouteTypes {
     | '/settings/admin'
     | '/settings/guild'
     | '/g/$guildId/documents/$documentId'
+    | '/g/$guildId/hypotheses/$hypothesisId'
     | '/g/$guildId/initiatives/$initiativeId'
     | '/g/$guildId/projects/$projectId'
     | '/g/$guildId/queues/$queueId'
@@ -845,6 +893,7 @@ export interface FileRouteTypes {
     | '/_serverRequired/welcome'
     | '/_serverRequired/_authenticated/created-tasks'
     | '/_serverRequired/_authenticated/documents'
+    | '/_serverRequired/_authenticated/hypotheses'
     | '/_serverRequired/_authenticated/initiatives'
     | '/_serverRequired/_authenticated/my-documents'
     | '/_serverRequired/_authenticated/my-projects'
@@ -859,6 +908,7 @@ export interface FileRouteTypes {
     | '/_serverRequired/_authenticated/'
     | '/_serverRequired/_authenticated/documents_/$documentId'
     | '/_serverRequired/_authenticated/g/$guildId'
+    | '/_serverRequired/_authenticated/hypotheses_/$hypothesisId'
     | '/_serverRequired/_authenticated/initiatives_/$initiativeId'
     | '/_serverRequired/_authenticated/profile/ai'
     | '/_serverRequired/_authenticated/profile/danger'
@@ -874,6 +924,7 @@ export interface FileRouteTypes {
     | '/_serverRequired/_authenticated/profile/'
     | '/_serverRequired/_authenticated/documents_/$documentId_/settings'
     | '/_serverRequired/_authenticated/g/$guildId/documents'
+    | '/_serverRequired/_authenticated/g/$guildId/hypotheses'
     | '/_serverRequired/_authenticated/g/$guildId/initiatives'
     | '/_serverRequired/_authenticated/g/$guildId/projects'
     | '/_serverRequired/_authenticated/g/$guildId/queues'
@@ -891,6 +942,7 @@ export interface FileRouteTypes {
     | '/_serverRequired/_authenticated/settings/admin/'
     | '/_serverRequired/_authenticated/settings/guild/'
     | '/_serverRequired/_authenticated/g/$guildId/documents_/$documentId'
+    | '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId'
     | '/_serverRequired/_authenticated/g/$guildId/initiatives_/$initiativeId'
     | '/_serverRequired/_authenticated/g/$guildId/projects_/$projectId'
     | '/_serverRequired/_authenticated/g/$guildId/queues_/$queueId'
@@ -1064,6 +1116,20 @@ declare module '@tanstack/react-router' {
       path: '/documents'
       fullPath: '/documents'
       preLoaderRoute: typeof ServerRequiredAuthenticatedDocumentsRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedRoute
+    }
+    '/_serverRequired/_authenticated/hypotheses': {
+      id: '/_serverRequired/_authenticated/hypotheses'
+      path: '/hypotheses'
+      fullPath: '/hypotheses'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedHypothesesRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedRoute
+    }
+    '/_serverRequired/_authenticated/hypotheses_/$hypothesisId': {
+      id: '/_serverRequired/_authenticated/hypotheses_/$hypothesisId'
+      path: '/hypotheses/$hypothesisId'
+      fullPath: '/hypotheses/$hypothesisId'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedRoute
     }
     '/_serverRequired/_authenticated/created-tasks': {
@@ -1297,6 +1363,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
     }
+    '/_serverRequired/_authenticated/g/$guildId/hypotheses': {
+      id: '/_serverRequired/_authenticated/g/$guildId/hypotheses'
+      path: '/hypotheses'
+      fullPath: '/g/$guildId/hypotheses'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
+    }
+    '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId': {
+      id: '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId'
+      path: '/hypotheses/$hypothesisId'
+      fullPath: '/g/$guildId/hypotheses/$hypothesisId'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
+    }
     '/_serverRequired/_authenticated/documents_/$documentId_/settings': {
       id: '/_serverRequired/_authenticated/documents_/$documentId_/settings'
       path: '/documents/$documentId/settings'
@@ -1523,12 +1603,14 @@ const ServerRequiredAuthenticatedGGuildIdSettingsRouteWithChildren =
 
 interface ServerRequiredAuthenticatedGGuildIdRouteChildren {
   ServerRequiredAuthenticatedGGuildIdDocumentsRoute: typeof ServerRequiredAuthenticatedGGuildIdDocumentsRoute
+  ServerRequiredAuthenticatedGGuildIdHypothesesRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesRoute
   ServerRequiredAuthenticatedGGuildIdInitiativesRoute: typeof ServerRequiredAuthenticatedGGuildIdInitiativesRoute
   ServerRequiredAuthenticatedGGuildIdProjectsRoute: typeof ServerRequiredAuthenticatedGGuildIdProjectsRoute
   ServerRequiredAuthenticatedGGuildIdQueuesRoute: typeof ServerRequiredAuthenticatedGGuildIdQueuesRoute
   ServerRequiredAuthenticatedGGuildIdSettingsRoute: typeof ServerRequiredAuthenticatedGGuildIdSettingsRouteWithChildren
   ServerRequiredAuthenticatedGGuildIdIndexRoute: typeof ServerRequiredAuthenticatedGGuildIdIndexRoute
   ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute: typeof ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute
+  ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute
   ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute: typeof ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute
   ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute: typeof ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute
   ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRoute: typeof ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRoute
@@ -1544,6 +1626,8 @@ const ServerRequiredAuthenticatedGGuildIdRouteChildren: ServerRequiredAuthentica
   {
     ServerRequiredAuthenticatedGGuildIdDocumentsRoute:
       ServerRequiredAuthenticatedGGuildIdDocumentsRoute,
+    ServerRequiredAuthenticatedGGuildIdHypothesesRoute:
+      ServerRequiredAuthenticatedGGuildIdHypothesesRoute,
     ServerRequiredAuthenticatedGGuildIdInitiativesRoute:
       ServerRequiredAuthenticatedGGuildIdInitiativesRoute,
     ServerRequiredAuthenticatedGGuildIdProjectsRoute:
@@ -1556,6 +1640,8 @@ const ServerRequiredAuthenticatedGGuildIdRouteChildren: ServerRequiredAuthentica
       ServerRequiredAuthenticatedGGuildIdIndexRoute,
     ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute:
       ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute,
+    ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute:
+      ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute,
     ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute:
       ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute,
     ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRoute:
@@ -1584,6 +1670,7 @@ const ServerRequiredAuthenticatedGGuildIdRouteWithChildren =
 interface ServerRequiredAuthenticatedRouteChildren {
   ServerRequiredAuthenticatedCreatedTasksRoute: typeof ServerRequiredAuthenticatedCreatedTasksRoute
   ServerRequiredAuthenticatedDocumentsRoute: typeof ServerRequiredAuthenticatedDocumentsRoute
+  ServerRequiredAuthenticatedHypothesesRoute: typeof ServerRequiredAuthenticatedHypothesesRoute
   ServerRequiredAuthenticatedInitiativesRoute: typeof ServerRequiredAuthenticatedInitiativesRoute
   ServerRequiredAuthenticatedMyDocumentsRoute: typeof ServerRequiredAuthenticatedMyDocumentsRoute
   ServerRequiredAuthenticatedMyProjectsRoute: typeof ServerRequiredAuthenticatedMyProjectsRoute
@@ -1596,6 +1683,7 @@ interface ServerRequiredAuthenticatedRouteChildren {
   ServerRequiredAuthenticatedIndexRoute: typeof ServerRequiredAuthenticatedIndexRoute
   ServerRequiredAuthenticatedDocumentsDocumentIdRoute: typeof ServerRequiredAuthenticatedDocumentsDocumentIdRoute
   ServerRequiredAuthenticatedGGuildIdRoute: typeof ServerRequiredAuthenticatedGGuildIdRouteWithChildren
+  ServerRequiredAuthenticatedHypothesesHypothesisIdRoute: typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRoute
   ServerRequiredAuthenticatedInitiativesInitiativeIdRoute: typeof ServerRequiredAuthenticatedInitiativesInitiativeIdRoute
   ServerRequiredAuthenticatedProjectsProjectIdRoute: typeof ServerRequiredAuthenticatedProjectsProjectIdRoute
   ServerRequiredAuthenticatedTagsTagIdRoute: typeof ServerRequiredAuthenticatedTagsTagIdRoute
@@ -1611,6 +1699,8 @@ const ServerRequiredAuthenticatedRouteChildren: ServerRequiredAuthenticatedRoute
       ServerRequiredAuthenticatedCreatedTasksRoute,
     ServerRequiredAuthenticatedDocumentsRoute:
       ServerRequiredAuthenticatedDocumentsRoute,
+    ServerRequiredAuthenticatedHypothesesRoute:
+      ServerRequiredAuthenticatedHypothesesRoute,
     ServerRequiredAuthenticatedInitiativesRoute:
       ServerRequiredAuthenticatedInitiativesRoute,
     ServerRequiredAuthenticatedMyDocumentsRoute:
@@ -1635,6 +1725,8 @@ const ServerRequiredAuthenticatedRouteChildren: ServerRequiredAuthenticatedRoute
       ServerRequiredAuthenticatedDocumentsDocumentIdRoute,
     ServerRequiredAuthenticatedGGuildIdRoute:
       ServerRequiredAuthenticatedGGuildIdRouteWithChildren,
+    ServerRequiredAuthenticatedHypothesesHypothesisIdRoute:
+      ServerRequiredAuthenticatedHypothesesHypothesisIdRoute,
     ServerRequiredAuthenticatedInitiativesInitiativeIdRoute:
       ServerRequiredAuthenticatedInitiativesInitiativeIdRoute,
     ServerRequiredAuthenticatedProjectsProjectIdRoute:

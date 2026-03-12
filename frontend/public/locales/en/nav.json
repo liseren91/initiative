@@ -43,6 +43,8 @@
   "queues": "Queues",
   "allQueues": "All Queues",
   "createQueue": "New Queue",
+  "hypotheses": "Hypotheses",
+  "allHypotheses": "All Hypotheses",
   "navigate": {
     "signInRequired": "Please sign in again to follow this link.",
     "missingDestination": "This link is missing destination details.",

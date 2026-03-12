@@ -8,6 +8,7 @@ import type dates from "../../public/locales/en/dates.json";
 import type documents from "../../public/locales/en/documents.json";
 import type errors from "../../public/locales/en/errors.json";
 import type guilds from "../../public/locales/en/guilds.json";
+import type hypotheses from "../../public/locales/en/hypotheses.json";
 import type importNs from "../../public/locales/en/import.json";
 import type initiatives from "../../public/locales/en/initiatives.json";
 import type landing from "../../public/locales/en/landing.json";
@@ -35,6 +36,7 @@ declare module "i18next" {
       documents: typeof documents;
       errors: typeof errors;
       guilds: typeof guilds;
+      hypotheses: typeof hypotheses;
       import: typeof importNs;
       initiatives: typeof initiatives;
       landing: typeof landing;
