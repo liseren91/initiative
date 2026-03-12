@@ -188,7 +188,7 @@ Images support `linux/amd64` and `linux/arm64` architectures.
 | `PUID` | UID the container runs as (for rootless/NAS setups) | `1000` |
 | `PGID` | GID the container runs as (for rootless/NAS setups) | `1000` |
 
-For FCM setup, see [docs/FIREBASE_SETUP.md](docs/FIREBASE_SETUP.md). For a complete list of options, see `backend/.env.example`.
+For a minimal run template (required vars only), see [env.template](env.template). For FCM setup, see [docs/FIREBASE_SETUP.md](docs/FIREBASE_SETUP.md). For a complete list of options, see `backend/.env.example`.
 
 ---
 
