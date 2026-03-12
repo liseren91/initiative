@@ -1,7 +1,30 @@
 from functools import lru_cache
+from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
 from pydantic import EmailStr, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_ASYNCPG_UNSUPPORTED_PARAMS = {"channel_binding", "options"}
+
+
+def _ensure_asyncpg_url(url: str) -> str:
+    """Convert a plain postgresql:// URL to postgresql+asyncpg:// and strip
+    query parameters that asyncpg doesn't understand (e.g. channel_binding)."""
+    if not url:
+        return url
+    for prefix in ("postgresql+psycopg2://", "postgres://", "postgresql://"):
+        if url.startswith(prefix):
+            url = "postgresql+asyncpg://" + url[len(prefix):]
+            break
+    parsed = urlparse(url)
+    if parsed.query:
+        params = parse_qs(parsed.query, keep_blank_values=True)
+        cleaned = {k: v for k, v in params.items() if k not in _ASYNCPG_UNSUPPORTED_PARAMS}
+        if len(cleaned) != len(params):
+            new_query = urlencode(cleaned, doseq=True)
+            parsed = parsed._replace(query=new_query)
+            url = urlunparse(parsed)
+    return url
 
 
 class Settings(BaseSettings):
@@ -17,6 +40,11 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://initiative:initiative@localhost:5432/initiative"
     DATABASE_URL_APP: str  # Non-superuser connection for RLS-enforced queries (required)
     DATABASE_URL_ADMIN: str  # Admin connection with BYPASSRLS for migrations (required)
+
+    @field_validator("DATABASE_URL", "DATABASE_URL_APP", "DATABASE_URL_ADMIN", mode="before")
+    @classmethod
+    def coerce_async_db_url(cls, value: str) -> str:
+        return _ensure_asyncpg_url(value)
 
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
