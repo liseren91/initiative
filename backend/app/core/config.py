@@ -4,12 +4,18 @@ from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 from pydantic import EmailStr, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-_ASYNCPG_UNSUPPORTED_PARAMS = {"channel_binding", "options"}
+_ASYNCPG_UNSUPPORTED_PARAMS = {"channel_binding", "options", "sslmode"}
 
 
 def _ensure_asyncpg_url(url: str) -> str:
     """Convert a plain postgresql:// URL to postgresql+asyncpg:// and strip
-    query parameters that asyncpg doesn't understand (e.g. channel_binding)."""
+    query parameters that asyncpg doesn't understand.
+
+    asyncpg uses its own SSL handling and doesn't accept libpq-style params
+    like sslmode, channel_binding, etc.  When sslmode=require (or stricter)
+    is present we translate it to asyncpg's ``ssl=true`` query param so the
+    connection still uses TLS.
+    """
     if not url:
         return url
     for prefix in ("postgresql+psycopg2://", "postgres://", "postgresql://"):
@@ -19,11 +25,16 @@ def _ensure_asyncpg_url(url: str) -> str:
     parsed = urlparse(url)
     if parsed.query:
         params = parse_qs(parsed.query, keep_blank_values=True)
+        needs_ssl = False
+        sslmode_vals = params.get("sslmode", [])
+        if any(v in ("require", "verify-ca", "verify-full") for v in sslmode_vals):
+            needs_ssl = True
         cleaned = {k: v for k, v in params.items() if k not in _ASYNCPG_UNSUPPORTED_PARAMS}
-        if len(cleaned) != len(params):
-            new_query = urlencode(cleaned, doseq=True)
-            parsed = parsed._replace(query=new_query)
-            url = urlunparse(parsed)
+        if needs_ssl and "ssl" not in cleaned:
+            cleaned["ssl"] = ["true"]
+        new_query = urlencode(cleaned, doseq=True)
+        parsed = parsed._replace(query=new_query)
+        url = urlunparse(parsed)
     return url
 
 
