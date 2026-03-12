@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-ARGS="app.main:app --host 0.0.0.0 --port 8173"
+PORT_VALUE="${PORT:-8173}"
+ARGS="app.main:app --host 0.0.0.0 --port ${PORT_VALUE}"
 
 if [ "${BEHIND_PROXY:-false}" = "true" ]; then
     FORWARDED_IPS="${FORWARDED_ALLOW_IPS:-*}"

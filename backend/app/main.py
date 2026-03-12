@@ -256,11 +256,16 @@ app.openapi = custom_openapi
 @app.on_event("startup")
 async def on_startup() -> None:
     from app.db.init_db import check_pre_baseline_db
+    logger.info("startup: checking pre-baseline database state")
     await check_pre_baseline_db()
+    logger.info("startup: running database migrations")
     await run_migrations()
+    logger.info("startup: ensuring default application settings")
     async with AdminSessionLocal() as session:
         await app_settings_service.ensure_defaults(session)
+    logger.info("startup: starting background notification tasks")
     app.state.notification_tasks = background_tasks_service.start_background_tasks()
+    logger.info("startup: complete")
 
 
 @app.on_event("shutdown")
