@@ -30,6 +30,7 @@ import { Route as ServerRequiredAuthenticatedNavigateRouteImport } from './route
 import { Route as ServerRequiredAuthenticatedMyProjectsRouteImport } from './routes/_serverRequired/_authenticated/my-projects'
 import { Route as ServerRequiredAuthenticatedMyDocumentsRouteImport } from './routes/_serverRequired/_authenticated/my-documents'
 import { Route as ServerRequiredAuthenticatedInitiativesRouteImport } from './routes/_serverRequired/_authenticated/initiatives'
+import { Route as ServerRequiredAuthenticatedHypothesesRouteImport } from './routes/_serverRequired/_authenticated/hypotheses'
 import { Route as ServerRequiredAuthenticatedDocumentsRouteImport } from './routes/_serverRequired/_authenticated/documents'
 import { Route as ServerRequiredAuthenticatedCreatedTasksRouteImport } from './routes/_serverRequired/_authenticated/created-tasks'
 import { Route as ServerRequiredAuthenticatedProfileIndexRouteImport } from './routes/_serverRequired/_authenticated/profile/index'
@@ -45,6 +46,7 @@ import { Route as ServerRequiredAuthenticatedProfileImportRouteImport } from './
 import { Route as ServerRequiredAuthenticatedProfileDangerRouteImport } from './routes/_serverRequired/_authenticated/profile/danger'
 import { Route as ServerRequiredAuthenticatedProfileAiRouteImport } from './routes/_serverRequired/_authenticated/profile/ai'
 import { Route as ServerRequiredAuthenticatedInitiativesInitiativeIdRouteImport } from './routes/_serverRequired/_authenticated/initiatives_.$initiativeId'
+import { Route as ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/hypotheses_.$hypothesisId'
 import { Route as ServerRequiredAuthenticatedGGuildIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId'
 import { Route as ServerRequiredAuthenticatedDocumentsDocumentIdRouteImport } from './routes/_serverRequired/_authenticated/documents_.$documentId'
 import { Route as ServerRequiredAuthenticatedSettingsGuildIndexRouteImport } from './routes/_serverRequired/_authenticated/settings/guild/index'
@@ -63,6 +65,7 @@ import { Route as ServerRequiredAuthenticatedGGuildIdSettingsRouteImport } from 
 import { Route as ServerRequiredAuthenticatedGGuildIdQueuesRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/queues'
 import { Route as ServerRequiredAuthenticatedGGuildIdProjectsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/projects'
 import { Route as ServerRequiredAuthenticatedGGuildIdInitiativesRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/initiatives'
+import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses'
 import { Route as ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/documents'
 import { Route as ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/documents_.$documentId_.settings'
 import { Route as ServerRequiredAuthenticatedGGuildIdSettingsIndexRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/settings/index'
@@ -73,14 +76,11 @@ import { Route as ServerRequiredAuthenticatedGGuildIdSettingsAiRouteImport } fro
 import { Route as ServerRequiredAuthenticatedGGuildIdQueuesQueueIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/queues_.$queueId'
 import { Route as ServerRequiredAuthenticatedGGuildIdProjectsProjectIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/projects_.$projectId'
 import { Route as ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/initiatives_.$initiativeId'
+import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses_.$hypothesisId'
 import { Route as ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/documents_.$documentId'
 import { Route as ServerRequiredAuthenticatedGGuildIdQueuesQueueIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/queues_.$queueId_.settings'
 import { Route as ServerRequiredAuthenticatedGGuildIdProjectsProjectIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/projects_.$projectId_.settings'
 import { Route as ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/initiatives_.$initiativeId_.settings'
-import { Route as ServerRequiredAuthenticatedHypothesesRouteImport } from './routes/_serverRequired/_authenticated/hypotheses'
-import { Route as ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/hypotheses_.$hypothesisId'
-import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses'
-import { Route as ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/hypotheses_.$hypothesisId'
 import { Route as ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdSettingsRouteImport } from './routes/_serverRequired/_authenticated/g/$guildId/documents_.$documentId_.settings'
 
 const ConnectRoute = ConnectRouteImport.update({
@@ -202,6 +202,12 @@ const ServerRequiredAuthenticatedInitiativesRoute =
     path: '/initiatives',
     getParentRoute: () => ServerRequiredAuthenticatedRoute,
   } as any)
+const ServerRequiredAuthenticatedHypothesesRoute =
+  ServerRequiredAuthenticatedHypothesesRouteImport.update({
+    id: '/hypotheses',
+    path: '/hypotheses',
+    getParentRoute: () => ServerRequiredAuthenticatedRoute,
+  } as any)
 const ServerRequiredAuthenticatedDocumentsRoute =
   ServerRequiredAuthenticatedDocumentsRouteImport.update({
     id: '/documents',
@@ -290,6 +296,12 @@ const ServerRequiredAuthenticatedInitiativesInitiativeIdRoute =
   ServerRequiredAuthenticatedInitiativesInitiativeIdRouteImport.update({
     id: '/initiatives_/$initiativeId',
     path: '/initiatives/$initiativeId',
+    getParentRoute: () => ServerRequiredAuthenticatedRoute,
+  } as any)
+const ServerRequiredAuthenticatedHypothesesHypothesisIdRoute =
+  ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport.update({
+    id: '/hypotheses_/$hypothesisId',
+    path: '/hypotheses/$hypothesisId',
     getParentRoute: () => ServerRequiredAuthenticatedRoute,
   } as any)
 const ServerRequiredAuthenticatedGGuildIdRoute =
@@ -400,34 +412,16 @@ const ServerRequiredAuthenticatedGGuildIdInitiativesRoute =
     path: '/initiatives',
     getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
   } as any)
-const ServerRequiredAuthenticatedGGuildIdDocumentsRoute =
-  ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport.update({
-    id: '/documents',
-    path: '/documents',
-    getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
-  } as any)
-const ServerRequiredAuthenticatedHypothesesRoute =
-  ServerRequiredAuthenticatedHypothesesRouteImport.update({
-    id: '/hypotheses',
-    path: '/hypotheses',
-    getParentRoute: () => ServerRequiredAuthenticatedRoute,
-  } as any)
-const ServerRequiredAuthenticatedHypothesesHypothesisIdRoute =
-  ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport.update({
-    id: '/hypotheses_/$hypothesisId',
-    path: '/hypotheses/$hypothesisId',
-    getParentRoute: () => ServerRequiredAuthenticatedRoute,
-  } as any)
 const ServerRequiredAuthenticatedGGuildIdHypothesesRoute =
   ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport.update({
     id: '/hypotheses',
     path: '/hypotheses',
     getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
   } as any)
-const ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute =
-  ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport.update({
-    id: '/hypotheses_/$hypothesisId',
-    path: '/hypotheses/$hypothesisId',
+const ServerRequiredAuthenticatedGGuildIdDocumentsRoute =
+  ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport.update({
+    id: '/documents',
+    path: '/documents',
     getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
   } as any)
 const ServerRequiredAuthenticatedDocumentsDocumentIdSettingsRoute =
@@ -482,6 +476,12 @@ const ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRoute =
   ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRouteImport.update({
     id: '/initiatives_/$initiativeId',
     path: '/initiatives/$initiativeId',
+    getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
+  } as any)
+const ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRoute =
+  ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport.update({
+    id: '/hypotheses_/$hypothesisId',
+    path: '/hypotheses/$hypothesisId',
     getParentRoute: () => ServerRequiredAuthenticatedGGuildIdRoute,
   } as any)
 const ServerRequiredAuthenticatedGGuildIdDocumentsDocumentIdRoute =
@@ -1111,13 +1111,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerRequiredAuthenticatedInitiativesRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedRoute
     }
-    '/_serverRequired/_authenticated/documents': {
-      id: '/_serverRequired/_authenticated/documents'
-      path: '/documents'
-      fullPath: '/documents'
-      preLoaderRoute: typeof ServerRequiredAuthenticatedDocumentsRouteImport
-      parentRoute: typeof ServerRequiredAuthenticatedRoute
-    }
     '/_serverRequired/_authenticated/hypotheses': {
       id: '/_serverRequired/_authenticated/hypotheses'
       path: '/hypotheses'
@@ -1125,11 +1118,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerRequiredAuthenticatedHypothesesRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedRoute
     }
-    '/_serverRequired/_authenticated/hypotheses_/$hypothesisId': {
-      id: '/_serverRequired/_authenticated/hypotheses_/$hypothesisId'
-      path: '/hypotheses/$hypothesisId'
-      fullPath: '/hypotheses/$hypothesisId'
-      preLoaderRoute: typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport
+    '/_serverRequired/_authenticated/documents': {
+      id: '/_serverRequired/_authenticated/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedDocumentsRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedRoute
     }
     '/_serverRequired/_authenticated/created-tasks': {
@@ -1228,6 +1221,13 @@ declare module '@tanstack/react-router' {
       path: '/initiatives/$initiativeId'
       fullPath: '/initiatives/$initiativeId'
       preLoaderRoute: typeof ServerRequiredAuthenticatedInitiativesInitiativeIdRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedRoute
+    }
+    '/_serverRequired/_authenticated/hypotheses_/$hypothesisId': {
+      id: '/_serverRequired/_authenticated/hypotheses_/$hypothesisId'
+      path: '/hypotheses/$hypothesisId'
+      fullPath: '/hypotheses/$hypothesisId'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedHypothesesHypothesisIdRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedRoute
     }
     '/_serverRequired/_authenticated/g/$guildId': {
@@ -1356,13 +1356,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdInitiativesRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
     }
-    '/_serverRequired/_authenticated/g/$guildId/documents': {
-      id: '/_serverRequired/_authenticated/g/$guildId/documents'
-      path: '/documents'
-      fullPath: '/g/$guildId/documents'
-      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport
-      parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
-    }
     '/_serverRequired/_authenticated/g/$guildId/hypotheses': {
       id: '/_serverRequired/_authenticated/g/$guildId/hypotheses'
       path: '/hypotheses'
@@ -1370,11 +1363,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
     }
-    '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId': {
-      id: '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId'
-      path: '/hypotheses/$hypothesisId'
-      fullPath: '/g/$guildId/hypotheses/$hypothesisId'
-      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport
+    '/_serverRequired/_authenticated/g/$guildId/documents': {
+      id: '/_serverRequired/_authenticated/g/$guildId/documents'
+      path: '/documents'
+      fullPath: '/g/$guildId/documents'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdDocumentsRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
     }
     '/_serverRequired/_authenticated/documents_/$documentId_/settings': {
@@ -1438,6 +1431,13 @@ declare module '@tanstack/react-router' {
       path: '/initiatives/$initiativeId'
       fullPath: '/g/$guildId/initiatives/$initiativeId'
       preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdInitiativesInitiativeIdRouteImport
+      parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
+    }
+    '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId': {
+      id: '/_serverRequired/_authenticated/g/$guildId/hypotheses_/$hypothesisId'
+      path: '/hypotheses/$hypothesisId'
+      fullPath: '/g/$guildId/hypotheses/$hypothesisId'
+      preLoaderRoute: typeof ServerRequiredAuthenticatedGGuildIdHypothesesHypothesisIdRouteImport
       parentRoute: typeof ServerRequiredAuthenticatedGGuildIdRoute
     }
     '/_serverRequired/_authenticated/g/$guildId/documents_/$documentId': {

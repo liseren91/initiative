@@ -64,4 +64,8 @@ export default defineConfig({
       "/uploads": createProxyConfig(),
     },
   },
+  preview: {
+    host: true,
+    allowedHosts: true,
+  },
 });
